@@ -28,4 +28,4 @@ sip==6.7.12
 six==1.16.0
 tomli==2.0.1
 tornado==6.3.3
-tzdata==2023d
+tzdata==2023.4
