@@ -12,7 +12,7 @@ munkres==1.1.4
 numexpr==2.8.7
 numpy==1.26.0
 openpyxl==3.0.10
-packaging==23.l
+packaging==23.1
 pandas==2.1.1
 pefile==2022.5.30
 Pillow==10.0.1
