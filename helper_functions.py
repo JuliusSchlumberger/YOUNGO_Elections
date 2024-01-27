@@ -29,7 +29,7 @@ def remove_first_four_chars(s):
     pd.Series: A Series with the first four characters removed from each string.
     """
     # Apply a lambda function to remove the first four characters if the element is a string and not NaN
-    return s.apply(lambda x: x[4:] if pd.notna(x) and len(x) > 4 else x)
+    return s.apply(lambda x: x[4:].strip() if pd.notna(x) and len(x) > 4 else x)
 
 
 def contains_all_elements(row, elements_list):

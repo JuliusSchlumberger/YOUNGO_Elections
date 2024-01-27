@@ -93,6 +93,13 @@ def clean_up_dataframe(df, consider_invalid=False):
 
     # Step 4: Remove the first four characters (the letters) from each cell
     split_df = split_df.apply(remove_first_four_chars)
+
+    # List of strings to convert to lowercase
+    strings_to_lowercase = ['no good candidate']
+
+    # Apply the function to each column in the dataframe
+    for col in split_df.columns:
+        split_df[col] = split_df[col].apply(lambda row: conditional_lowercase(row, strings_to_lowercase))
     # print(split_df)
 
     # Step 5: Get all candidate names by concatenating values and finding unique ones
@@ -108,7 +115,7 @@ def clean_up_dataframe(df, consider_invalid=False):
 
     # Step 6: Remove entries with 'no good candidate' in the first choice
     no_good_candidate_count += len(final_df[final_df['choice_1'].str.lower().str.startswith('no good')])
-    # final_df = final_df.drop(final_df[final_df['choice_1'].str.lower().str.startswith('no good')].index)
+    final_df = final_df.drop(final_df[final_df['choice_1'].str.lower().str.startswith('no good')].index)
 
     # Step 7 (optional): remove invalid votes
     if consider_invalid == False:
@@ -125,12 +132,7 @@ def clean_up_dataframe(df, consider_invalid=False):
         invalid_votes = 0
 
     # Step 8: streamline use of no good candidate
-    # List of strings to convert to lowercase
-    # strings_to_lowercase = ['no good candidate']
 
-    # Apply the function to each column in the dataframe
-    # for col in final_df.columns:
-    #     final_df[col] = final_df[col].apply(lambda row: conditional_lowercase(row, strings_to_lowercase))
 
     return final_df, all_votes, no_good_candidate_count, invalid_votes
 
