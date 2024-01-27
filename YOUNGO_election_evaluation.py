@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 import pandas as pd
 from evaluation import run_instant_runoff
-import openpyxl  # Required for checking merged cells
 
 # Set up the main window
 root = tk.Tk()
