@@ -32,19 +32,42 @@ def remove_first_four_chars(s):
     return s.apply(lambda x: x[4:].strip() if pd.notna(x) and len(x) > 4 else x)
 
 
+# def contains_all_elements(row, elements_list):
+#     """
+#     Checks if all elements in a provided list are present in a DataFrame row.
+#
+#     Args:
+#     row (pd.Series): A row of a DataFrame.
+#     elements_list (list): A list of elements to check for in the row.
+#
+#     Returns:
+#     bool: True if all elements are found in the row, False otherwise.
+#     """
+#     # Check if all elements in elements_list are present in the row
+#     return all(elem in row.values for elem in elements_list)
+
 def contains_all_elements(row, elements_list):
     """
-    Checks if all elements in a provided list are present in a DataFrame row.
+    Checks if all elements in a provided list are present in a DataFrame row, or if the last
+    element of the row starts with 'no good candidate'.
 
     Args:
     row (pd.Series): A row of a DataFrame.
     elements_list (list): A list of elements to check for in the row.
 
     Returns:
-    bool: True if all elements are found in the row, False otherwise.
+    bool: True if all elements are found in the row or if the last element starts with 'no good candidate', False otherwise.
     """
+    # Check if the last element of the row starts with 'no good candidate'
+    if isinstance(row[-1], str) and row[-1].lower().startswith('no good candidate'):
+        return True
+    # for elem in row:
+    #     if isinstance(elem, str) and 'no good candidate' in elem.lower():
+    #         return True
+
     # Check if all elements in elements_list are present in the row
     return all(elem in row.values for elem in elements_list)
+
 
 
 def shift_choices(row, eliminated_candidate):
